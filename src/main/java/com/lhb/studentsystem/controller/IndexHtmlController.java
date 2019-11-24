@@ -7,12 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexHtmlController {
 
     @RequestMapping("/")
-    public String index(){
+    public String index() {
         return "login";
     }
 
     @RequestMapping("/login")
-    public String login(){
+    public String login() {
         return "login";
     }
+
 }

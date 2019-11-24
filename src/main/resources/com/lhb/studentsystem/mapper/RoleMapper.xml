@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lhb.studentsystem.mapper.RoleMapper">
+    <resultMap id="resultMap" type="com.lhb.studentsystem.model.Role">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="level" column="level"/>
+    </resultMap>
+    <select id="findById" parameterType="Integer" resultType="com.lhb.studentsystem.model.Role">
+        select * from t_role where id=#{id}
+    </select>
+
+    <select id="findAllRole"  resultType="com.lhb.studentsystem.model.Role">
+        select * from t_role
+    </select>
+    
+    <select id="findByName" parameterType="String" resultType="com.lhb.studentsystem.model.Role">
+        select * from t_role where name=#{name}
+    </select>
+
+    <delete id="deleteRole" parameterType="Integer">
+        delete from t_role where id = #{id}
+    </delete>
+
+    <insert id="addRole" >
+         insert into t_role(id,name,content) values (#{id},#{name},#{content})
+    </insert>
+
+    <update id="roleUpdate" >
+        update t_role set content = #{content} , name = #{name} where id = #{id}
+    </update>
+</mapper>

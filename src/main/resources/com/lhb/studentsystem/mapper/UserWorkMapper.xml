@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lhb.studentsystem.mapper.UserWorkMapper">
+    <resultMap id="resultMap" type="com.lhb.studentsystem.model.UserWork">
+        <id property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="homeworkId" column="homework_id"/>
+        <result property="file" column="file"/>
+        <result property="status" column="status"/>
+        <result property="commitTime" column="commit_time"/>
+        <result property="modifiedTime" column="modified_time"/>
+    </resultMap>
+
+    <select id="findAllUserWork"  resultMap="resultMap">
+        select * from t_userwork
+    </select>
+
+    <select id="findUserWorkByUserId" resultType="Integer">
+         select count(*) from t_userwork where user_id = #{userId}
+    </select>
+
+    <delete id="userWorkDeleteOne" parameterType="Integer">
+        delete from t_userwork where id=#{id}
+    </delete>
+
+    <select id="findByHomeWorkId" parameterType="Integer" resultType="Integer">
+       select count(*) from t_userwork where homework_id = #{homeworkId}
+    </select>
+</mapper>

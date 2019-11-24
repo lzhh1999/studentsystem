@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lhb.studentsystem.mapper.UserMapper">
+    <resultMap id="resultMap" type="com.lhb.studentsystem.model.AdminUser">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="roleId" column="role_id"/>
+    </resultMap>
 
     <insert id="addUser">
          insert into t_user(id,username,password,sys_password) values (#{id},#{username},#{password},#{sysPassword})
@@ -14,4 +19,40 @@
         select * from t_user where id=#{id}
     </select>
 
+    <select id="findAll" resultMap="resultMap">
+        select * from t_user
+    </select>
+
+    <delete id="deleteUser" parameterType="Integer">
+        delete from t_user where id = #{id}
+    </delete>
+
+    <select id="findWithId" resultMap="resultMap">
+        select * from t_user where id=#{id}
+    </select>
+
+    <update id="updateByRoleIdAndId" >
+        update t_user set role_id = #{roleId} where id = #{id}
+    </update>
+
+    <select id="findByRoleId" parameterType="Integer" resultType="Integer">
+       select count(*) from t_user where role_id = #{roleId}
+    </select>
+
+    <select id="findUser"
+            resultType="com.lhb.studentsystem.model.AdminUser"
+    parameterType="com.lhb.studentsystem.model.AdminUser">
+        select * from t_user
+        <where>
+            <if test="id !=null and id !=''">
+            and id like concat('%',#{id},'%')
+            </if>
+            <if test="username !=null and username !=''">
+                and username like concat('%',#{username},'%')
+            </if>
+            <if test="roleId !=null and roleId !=''">
+                and role_id = #{roleId}
+            </if>
+        </where>
+    </select>
 </mapper>

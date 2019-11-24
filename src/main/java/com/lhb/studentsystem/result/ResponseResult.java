@@ -1,5 +1,6 @@
 package com.lhb.studentsystem.result;
 
+import com.lhb.studentsystem.model.Admin;
 import lombok.Builder;
 import lombok.Data;
 
@@ -17,7 +18,7 @@ public class ResponseResult {
         this.data = data;
     }
 
-    public ResponseResult() {
+    public ResponseResult(int code, int i, Admin admin) {
     }
 
 
